@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados</title>
+    <script>
+        window.onload = inicio;
+
+        function inicio() {
+            let botao = document.getElementById('botao');
+            botao.addEventListener('click', envia);
+        }
+
+        function envia() {
+            let numero = document.getElementById('numero').value;
+            let saida = document.getElementById('saida');
+
+            if (numero.trim() === "") {
+                saida.innerHTML = "Digite um número.";
+                return;
+            }
+
+            const xhttp = new XMLHttpRequest();
+
+            xhttp.onload = function () {
+                saida.innerHTML = this.responseText;
+            }
+
+            xhttp.open("GET", "recebe_num.php?num=" + encodeURIComponent(numero), true);
+            xhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <h2>Enviar número usando Ajax GET</h2>
+
+    <label for="numero">Número:</label>
+    <input type="number" id="numero">
+    <br><br>
+
+    <button id="botao">Enviar</button>
+    <p id="saida"></p>
+</body>
+</html>

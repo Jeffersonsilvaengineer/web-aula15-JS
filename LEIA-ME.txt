@@ -1,0 +1,18 @@
+Arquivos prontos da Aula 15.
+
+Como testar:
+1. Copie todos os arquivos desta pasta para C:/xampp/htdocs/aula15
+2. Abra o XAMPP e inicie o Apache.
+3. No navegador, acesse:
+   http://localhost/aula15/exercicio1_converte_pronto.html
+   http://localhost/aula15/exercicio2_trade_pronto.html
+
+Exercício 1:
+- Envia valor_reais para converte.php usando Ajax GET.
+- Recebe JSON com valor convertido em dólar.
+- Mostra o resultado em um parágrafo.
+
+Exercício 2:
+- Envia o valor em Reais para trade.php usando Ajax POST.
+- Recebe JSON com o rendimento.
+- Mostra o saldo do investimento rápido em um parágrafo.

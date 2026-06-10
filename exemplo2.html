@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados</title>
+    <script>
+        window.onload = inicio;
+
+        function inicio() {
+            let botao = document.getElementById('botao');
+            botao.addEventListener('click', envia);
+        }
+
+        function envia() {
+            let nome = document.getElementById('nome').value;
+            let saida = document.getElementById('saida');
+
+            if (nome.trim() === "") {
+                saida.innerHTML = "Digite um nome.";
+                return;
+            }
+
+            const xhttp = new XMLHttpRequest();
+
+            xhttp.onload = function () {
+                saida.innerHTML = this.responseText;
+            }
+
+            xhttp.open("GET", "recebe.php?nome=" + encodeURIComponent(nome), true);
+            xhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <h2>Enviar nome usando Ajax</h2>
+
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome">
+    <br><br>
+
+    <button id="botao">Enviar</button>
+    <p id="saida"></p>
+</body>
+</html>

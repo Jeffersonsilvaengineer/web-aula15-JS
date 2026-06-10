@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados</title>
+    <script>
+        window.onload = inicio;
+
+        function inicio() {
+            let botao = document.getElementById('botao');
+            botao.addEventListener('click', envia);
+        }
+
+        function envia() {
+            let saida = document.getElementById('saida');
+
+            const xhttp = new XMLHttpRequest();
+
+            xhttp.onload = function () {
+                saida.innerHTML = this.responseText;
+            }
+
+            xhttp.open("POST", "recebe_num_post.php");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("x=25");
+        }
+    </script>
+</head>
+<body>
+    <h2>Enviar número 25 usando Ajax POST</h2>
+
+    <button id="botao">Enviar</button>
+    <p id="saida"></p>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversão de Reais para Dólar</title>
+    <script>
+        window.onload = inicio;
+
+        function inicio() {
+            let botao = document.getElementById('botao');
+            botao.addEventListener('click', converter);
+        }
+
+        function converter() {
+            let valorReais = document.getElementById('valor_reais').value;
+            let saida = document.getElementById('saida');
+
+            if (valorReais.trim() === "") {
+                saida.innerHTML = "Digite um valor em reais.";
+                return;
+            }
+
+            const xhttp = new XMLHttpRequest();
+
+            xhttp.onload = function () {
+                let resposta = JSON.parse(this.responseText);
+
+                if (resposta.status === "sucesso") {
+                    saida.innerHTML = "R$ " + resposta.valor_original + " equivalem a US$ " + resposta.valor_convertido + ".";
+                } else {
+                    saida.innerHTML = resposta.mensagem;
+                }
+            }
+
+            xhttp.open("GET", "converte.php?valor_reais=" + encodeURIComponent(valorReais), true);
+            xhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <h2>Conversor de Reais para Dólar</h2>
+
+    <label for="valor_reais">Valor em reais:</label>
+    <input type="number" step="0.01" id="valor_reais">
+    <br><br>
+
+    <button id="botao">Converter</button>
+    <p id="saida"></p>
+</body>
+</html>
